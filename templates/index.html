@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>hello voice</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" href="static/Hello voice1.jpg">
+
+</head>
+<body>
+    <script>
+  function showListening() {
+    const statusText = document.getElementById("status");
+    statusText.innerText = "🎙️ Listening... Please speak!";
+    // Optional: clear it after some seconds if you want
+    setTimeout(() => {
+      statusText.innerText = "";
+    }, 5000);
+  }
+  print("🎤 Recognized input:", text)
+
+</script>
+<div class="container">
+    <h1>
+      <img src="/static/Hello voice1.jpg" alt="icon" style="width: 70px; vertical-align: middle; margin-right: 10px;">
+      hello voice
+    </h1>
+    <p>Speak, Translate, Understand.</p>
+
+    <form method="POST">
+      <label for="srcLang">From:</label>
+      <select name="srcLang" id="srcLang">
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+      </select>
+
+      <label for="destLang">To:</label>
+      <select name="destLang" id="destLang">
+        <option value="hi">Hindi</option>
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+      </select>
+
+      <br>
+      <button type="submit" onclick="showListening()">🎤 Speak & Translate</button>
+      <p id="status" style="font-weight: bold; color: #555;">
+    <span id="spinner" style="display: none;">🔄</span>
+</p>
+
+    </form>
+{% if translated %}
+  <div id="output" class="output-box">
+   <h2>📝 Translated Text:</h2>
+   <p>{{ translated }}</p>
+  </div>
+{% endif %}
+
+
+ {% if audio_file %}
+  <audio controls autoplay>
+    <source src="{{ url_for('static', filename=audio_file) }}?v={{ random() }}" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+{% endif %}
+
+
+<div class="footer">
+  🗣️ Say it. 🎧 Hear it. 🌍 Understand it. ⚡ Instantly.
+</div>
+
+  </div>
+</body>
+</html>
+
